@@ -772,7 +772,7 @@ let closeImgShow = document.querySelector('#closeImgShow')
 templates.forEach((temp) => {
   temp.addEventListener('click', () => {
 
-    cvPrevCon.classList.remove('temp-1', 'temp-2', 'temp-3')
+    cvPrevCon.classList.remove('temp-1', 'tem-2', 'temp-3')
     cvPrevCon.classList.add(temp.dataset.temp)
 
     templates.forEach((item) => {
