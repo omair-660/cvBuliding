@@ -779,7 +779,7 @@ input#image {
 }
 
 @media (max-width:665px) {
-  .data .container .card-body,.templates .containe{
+  .data .container .card-body,.templates .container{
     grid-template-columns: 1fr;
   }
   .container {
