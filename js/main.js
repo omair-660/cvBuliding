@@ -69,7 +69,10 @@ let closeErrBtn = document.querySelector(".closeErrBtn");
 closeErrBtn.addEventListener("click", () => {
   closeErr();
 });
-    cvPrevCon.style.display = 'none'
+let btnPrint = document.querySelector(".btnPrint");
+
+cvPrevCon.style.display = "none";
+    btnPrint.style.display = "none";
 
 // let preveviewImage = document.querySelector('.preveviewImage')
 // let preveviewName = document.querySelector('.preveviewName')
@@ -112,8 +115,15 @@ let cvData = {
 // create url src for image and added to object
 image.addEventListener("change", (e) => {
   imageVal = URL.createObjectURL(e.target.files[0]);
-  cvData.personal.image = imageVal;
-  inputImg.textContent = e.target.files[0].name;
+  if (e.target.files[0].type.includes('image')) {
+    cvData.personal.image = imageVal;
+    // inputImg.textContent = e.target.files[0].name;
+    e.target.files[0] = ''
+  }else{
+    sheowErr()
+    errosText.textContent = `يرجى إختيار صورة فقط وانت اختارت (${e.target.files[0].type}) وهذا غير صالح`
+  }
+
 });
 
 function sheowErr() {
@@ -141,11 +151,15 @@ createCv.addEventListener("click", () => {
     mail.focus();
     errosText.innerHTML = "البريد الالكتروني مطلوب";
     sheowErr();
-    cvPrevCon.style.display = 'none'
+    cvPrevCon.style.display = "none";
+    btnPrint.style.display = "none";
+
     return;
   } else {
     displayData();
-    cvPrevCon.style.display = 'block'
+    checkLangSec()
+    btnPrint.style.display = "block";
+    cvPrevCon.style.display = "block";
     //   cvData = {
     //   personal: {
     //     name: "",
@@ -251,6 +265,11 @@ addEx.addEventListener("click", () => {
     displayExperience();
     checkExperienceItem();
     closeErr();
+    jobTitleEx.value = ''
+companyName.value = ''
+startYearEx.value = ''
+endYearEx.value = ''
+descriptionJob.value = ''
   } else {
     sheowErr();
     errosText.textContent = "لا يمكن إضافة خبرة والحقول فارغة !!";
@@ -289,6 +308,7 @@ skillBtn.addEventListener("click", () => {
     displaySkills();
     checkSkillsItem();
     closeErr();
+    skills.value = ''
   } else {
     errosText.textContent = "لا يمكن إضافة مهارة والحقل فارغ !!";
     sheowErr();
@@ -316,21 +336,29 @@ function delskill(i) {
 addlang.addEventListener("click", () => {
   let langVal = language.value.trim();
   let langLevelVal = Number(languageLevel.value);
-  if (langLevelVal > 100 || langLevelVal < 0) {
+  if (langLevelVal > 100 || langLevelVal < 0 || langLevelVal == '') {
     sheowErr();
-    errosText.textContent = "يرجى ادخال رقم ما بين [ 0 - 100 ] !!";
+    errosText.textContent = "يرجى ادخال رقم ما بين [ 1 - 100 ] !!";
     languageLevel.focus();
     languageLevel.classList.add("err");
     return;
   }
+  if (!langVal || !langLevelVal) {
+    sheowErr()
+    errosText.textContent = 'لا يمكن إضافة لغة والحقول فارغة'
+    return
+  }
+
   cvData.languages.push({
     language: langVal,
     level: langLevelVal,
   });
   displayLanguage();
   checkLanguagesItem();
-  closeErr()
-    languageLevel.classList.remove("err");
+  closeErr();
+  language.value = ''
+languageLevel.value = ''
+  languageLevel.classList.remove("err");
 });
 
 // display language data to html body
@@ -358,13 +386,13 @@ function delLang(i) {
 // add projects data to object
 addPro.addEventListener("click", () => {
   let proNameVal = proName.value.trim();
-  let descriptionProVal = descriptionPro.value.trim() 
-  let liveUrlVal = liveUrl.value.trim() ;
-  let githubUrlVal = githubUrl.value.trim() ;
+  let descriptionProVal = descriptionPro.value.trim();
+  let liveUrlVal = liveUrl.value.trim();
+  let githubUrlVal = githubUrl.value.trim();
   if (!proNameVal) {
-    sheowErr()
+    sheowErr();
     errosText.textContent = "لا يمكن إضافة مشروع والحقول فارغة !!";
-    return
+    return;
   }
   cvData.projects.push({
     name: proNameVal,
@@ -374,7 +402,11 @@ addPro.addEventListener("click", () => {
   });
   checkProjectsItem();
   displayProjects();
-  closeErr()
+  closeErr();
+   proName.value = ''
+ descriptionPro.value = ''
+ liveUrl.value = ''
+githubUrl.value = ''
 });
 
 // display projects data to html body
@@ -386,8 +418,8 @@ function displayProjects() {
         <h3>${i + 1}</h3>
         <p><strong>اسم المشروع :</strong> <span>${pro.name}</span></p>
         <p><strong>وصف المشروع :</strong> <span>${pro.description}</span></p>
-        <p><strong>المعاينة :</strong> <a style='color : var(--primary)' target="_blank" href='${pro.liveUrl}'>${liveUrl.value ? 'رابط المعاينة' : "لم يتم إضافة رابط المعاينة"}</a></p>
-        <p><strong>المشروع :</strong> <a style='color : var(--primary)' target="_blank" href='${pro.githubUrl}'>${liveUrl.value ? 'رابط المشروع' : "لم يتم إضافة رابط الجيت هب"}</a></p>
+        <p><strong>المعاينة :</strong> <a style='color : var(--primary)' target="_blank" href='${pro.liveUrl}'>${liveUrl.value ? "رابط المعاينة" : "لم يتم إضافة رابط المعاينة"}</a></p>
+        <p><strong>المشروع :</strong> <a style='color : var(--primary)' target="_blank" href='${pro.githubUrl}'>${liveUrl.value ? "رابط المشروع" : "لم يتم إضافة رابط الجيت هب"}</a></p>
         <button onclick='delPro(${i})' class="btnDel"><i class="fa-solid fa-trash"></i></button>
         </div>
         `;
@@ -431,6 +463,8 @@ selectedLang.addEventListener("change", () => {
     : selectedLang.value === "english"
       ? (cvPrevCon.style.direction = "ltr")
       : (cvPrevCon.style.direction = "rtl");
+
+  checkLangSec()
 });
 
 function displayAboutData() {
@@ -449,7 +483,7 @@ function displayExData() {
   let boxExper = "";
   cvData.experience.forEach((ele) => {
     boxExper += `
-            <article class="experience-item">
+            <article class="experience-item checkLang">
 
             <div class="item-head">
 
@@ -485,7 +519,7 @@ function displayProData() {
   let boxPro = "";
   cvData.projects.forEach((ele) => {
     boxPro += `
-            <article class="project-item">
+            <article class="project-item checkLang">
 
             <div class="item-head">
               <h4>${ele.name}</h4>
@@ -756,40 +790,75 @@ function validationChange(input) {
   }
 }
 
-let btnPrint = document.querySelector(".btnPrint");
 btnPrint.addEventListener("click", () => {
   window.print();
 });
 
-// templates 
+// templates
 
-let templates = document.querySelectorAll('.templates .box')
-let templatesImages = document.querySelectorAll('.templates .box img')
-let imageShowCon = document.querySelector('.imageShow')
-let imageShow = document.querySelector('.imageShow img')
-let closeImgShow = document.querySelector('#closeImgShow')
+let templates = document.querySelectorAll(".templates .box");
+let templatesImages = document.querySelectorAll(".templates .box img");
+let imageShowCon = document.querySelector(".imageShow");
+let imageShow = document.querySelector(".imageShow img");
+let closeImgShow = document.querySelector("#closeImgShow");
 
 templates.forEach((temp) => {
-  temp.addEventListener('click', () => {
-
-    cvPrevCon.classList.remove('temp-1', 'tem-2', 'temp-3')
-    cvPrevCon.classList.add(temp.dataset.temp)
+  temp.addEventListener("click", () => {
+    cvPrevCon.classList.remove("temp-1", "tem-2", "temp-3" , "temp-4");
+    cvPrevCon.classList.add(temp.dataset.temp);
 
     templates.forEach((item) => {
-      item.classList.remove('active')
-    })
+      item.classList.remove("active");
+    });
 
-    temp.classList.add('active')
+    temp.classList.add("active");
+  });
+});
+
+templatesImages.forEach((img) => {
+  img.addEventListener("click", () => {
+    imageShowCon.style.scale = "1";
+    imageShow.src = img.src;
+  });
+});
+
+closeImgShow.addEventListener("click", () => {
+  imageShowCon.style.scale = "0";
+});
+
+function checkLangSec() {
+    let itemCheckLang = document.querySelectorAll(".checkLang");
+  itemCheckLang.forEach((item) => {
+    if (selectedLang.value === "arabic") {
+      console.log(true);
+      item.classList.add("ar");
+      item.classList.remove("en");
+    } else {
+      console.log(false);
+      
+      item.classList.remove("ar");
+      item.classList.add("en");
+    }
+  });
+}
+
+let addSection = document.querySelectorAll('.addSection')
+
+addSection.forEach((btn) => {
+
+  btn.addEventListener('click', () => {
+
+    let card = btn.closest('.card')
+    let cardSlide = card.querySelector('.cardSlide')
+
+    cardSlide.classList.toggle('slide')
+
+    if (cardSlide.classList.contains('slide')) {
+      btn.textContent = 'إخفاء'
+    } else {
+      btn.textContent = 'إضافة'
+    }
+
   })
-})
 
-templatesImages.forEach((img)=>{
-  img.addEventListener('click' , ()=>{
-  imageShowCon.style.scale = '1'
-  imageShow.src = img.src
-  })
-})
-
-closeImgShow.addEventListener('click' , ()=>{
-  imageShowCon.style.scale = '0'
 })
