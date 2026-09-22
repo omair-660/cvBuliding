@@ -22,3 +22,15 @@ darkBtn.addEventListener('click' , ()=>{
     localStorage.setItem('dark' , JSON.stringify(isDark))
 })
 
+let barsBtn = document.querySelector('nav .bars')
+let links = document.querySelector('nav .links')
+
+
+barsBtn.addEventListener('click' , ()=>{
+    links.classList.toggle('active')
+    if (links.classList.contains('active')) {
+        barsBtn.innerHTML = `<i style='color: var(--danger)' class="fa-solid fa-close"></i>`
+    }else{
+        barsBtn.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`
+    }
+})

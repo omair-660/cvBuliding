@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ابني سيرتك</title>
-    <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/fav.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,31 +13,291 @@
         rel="stylesheet">
     <link rel="stylesheet" href="icons/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
 
     <nav>
         <div class="container">
-            <div class="logo">
-                <h1>ابني <span>سيرتك</span></h1>
-            </div>
+            <a href="#" class="logo">
+                <div class="icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                <div class="text">
+                    <h1>سيرتي<span>.</span></h1>
+                    <p>صانع السيرة الذاتية</p>
+                </div>
+            </a>
             <div class="links">
                 <ul>
                     <li><a href="#home">الصفحة الرئيسية</a></li>
-                    <li><a href="pages/formCv.html">ابني سيرتك</a></li>
-                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#bests">المميزات</a></li>
+                    <li><a href="#howWork">كيف يعمل</a></li>
+                    <li><a href="pages/about.html">من نحن</a></li>
+                    <li><a href="pages/contact.html">تواصل معي</a></li>
                 </ul>
             </div>
-            <div class="btns">
-                <button class="darkBtn"></button>
+            <div class="end">
+                <div class="btns">
+                    <button class="darkBtn"></button>
+                </div>
+                <div class="btns">
+                    <button class="bars"><i class="fa-solid fa-bars-staggered"></i></button>
+                </div>
             </div>
         </div>
     </nav>
 
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="text">
+                    <div class="top">
+                        <span>منصتك الأمثل لإنشاء السير الذاتية</span>
+                        <div class="circle"></div>
+                    </div>
+                    <h1>
+                        أنشئ سيرتك الذاتية <span>بسهولة</span>
+                    </h1>
+                    <p>
+                        صمم CV احترافي خلال دقائق واختر القالب المناسب لك.
+                    </p>
+                    <div class="btns">
+                        <button>إنشاء سيرتي الذاتية <i class="fa-solid fa-plus"></i></button>
+                        <button> استكشف الأدوات <i class="fa-solid fa-magic"></i></button>
+                    </div>
+                    <ul>
+                        <li>
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span>بدون تسجيل حساب</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span>قوالب متعددة</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span>100% مجاني للبدء</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="image">
+                    <img src="images/temp-1.png" alt="">
+                    <div class="end">
+                        <div class="icon">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                        </div>
+                        <div>
+                            <h3>تصميم حديث</h3>
+                            <span>طباعة a4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="bests common" id="bests">
+            <div class="container">
+                <div class="heading">
+                    <span>لماذا تختار منصتنا؟</span>
+                    <h2>مميزات الموقع</h2>
+                    <p>توفّر لك منصتنا كل ما تحتاجه لبناء سيرة ذاتية فريدة ..</p>
+                </div>
+                <div class="con">
+                    <div class="box">
+                        <div class="icon">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div class="text">
+                            <h4>قوالب متعددة</h4>
+                            <p>
+                                تشكيلة واسعة من القوالب المبتكرة المصممة بعناية لتناسب جميع التخصصات والمستويات المهنية.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="icon">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <div class="text">
+                            <h4>معاينة مباشرة</h4>
+                            <p>
+                                شاهد التغييرات والتعديلات فور كتابتها لحظة بلحظة مع محرر التغيير الفوري والمباشر.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="icon">
+                            <i class="fa-solid fa-language"></i>
+                        </div>
+                        <div class="text">
+                            <h4>دعم العربية والإنجليزية</h4>
+                            <p>
+                                دعم كامل للغتين مع خطوط محددة واحترافية وتوجيه محاذاتي دقيق لكل لغة على حدة.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="icon">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div class="text">
+                            <h4>تحميل PDF</h4>
+                            <p>
+                                تصدير سيرتك الذاتية بضغطة زر بصيغة PDF عالية الجودة ونقية بدون أي علامات مائية.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="icon">
+                            <i class="fa-solid fa-print"></i>
+                        </div>
+                        <div class="text">
+                            <h4>تصميم مناسب للطباعة</h4>
+                            <p>
+                                أبعاد A4 قياسية دقيقة تضمن طباعة ورقية ممتازة بدون مشاكل الهوامش أو التداخل.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <div class="text">
+                            <h4>خصوصية تامة</h4>
+                            <p>
+                                بياناتك محفوظة بأمان على جهازك الشخصي دون الحاجة لمشاركتها أو تخزينها على خوادم خارجية.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="howWork common" id="howWork">
+            <div class="container">
+                <div class="heading">
+                    <span>خطوات بسيطة وسريعة</span>
+                    <h2>كيف يعمل؟</h2>
+                    <p>احصل على سيرتك الذاتية في 4 خطوات بسيطة فقط دون أي تعقيد.</p>
+                </div>
+                <div class="con">
+                    <div class="box">
+                        <div class="icon">
+                            <span>01</span>
+                        </div>
+                        <div class="text">
+                            <h4>أدخل بياناتك</h4>
+                            <p>
+                                قم بملء معلوماتك الشخصية، المؤهلات التعليمية، والخبرات العملية عبر نموذج سهل وسلس.
+                            </p>
+                            <div class="arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="icon">
+                            <span>02</span>
+                        </div>
+                        <div class="text">
+                            <h4>اختر القالب</h4>
+                            <p>
+                                اختر من بين مجموعة من القوالب الاحترافية المتنوعة التي تتناسب مع مجال عملك.
+                            </p>
+                            <div class="arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="icon">
+                            <span>03</span>
+                        </div>
+                        <div class="text">
+                            <h4>راجع سيرتك الذاتية</h4>
+                            <p>
+                                استعرض المظهر النهائي لسيرتك الذاتية من خلال المعاينة المباشرة وتأكد من صحة البيانات.
+                            </p>
+                            <div class="arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="icon">
+                            <span>04</span>
+                        </div>
+                        <div class="text">
+                            <h4>حمّل PDF</h4>
+                            <p>
+                                قم بتنزيل سيرتك الذاتية بصيغة PDF جاهزة للإرسال فوراً للشركات أو للطباعة.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="bulid">
+            <div class="container">
+                <div class="text">
+                    <h3>جاهز للبدء في مسيرتك المهنية؟</h3>
+                    <p>
+                        استغرق أقل من 5 دقائق لإعداد سيرة ذاتية تبهر الجميع.
+                    </p>
+                </div>
+                <div class="btn">
+                    <button class="bulidNow">أنشئ سيرتك الآن</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <h2>سيرتي.</h2>
+                    <p>
+                        أنشئ سيرتك الذاتية بسهولة واختر التصميم المناسب لك.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h3>روابط</h3>
+
+                    <a href="#">الرئيسية</a>
+                    <a href="#">القوالب</a>
+                    <a href="#">أدوات أخرى</a>
+                </div>
+
+                <div class="footer-social">
+                    <h3>تواصل معي</h3>
+
+                    <a href="#">GitHub</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    © 2026 CV Builder — جميع الحقوق محفوظة
+                </p>
+            </div>
+
+        </div>
+    </footer>
 
     <script src="js/common.js"></script>
+    <script src="js/home.js"></script>
 </body>
 
 </html>
