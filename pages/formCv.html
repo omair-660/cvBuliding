@@ -18,7 +18,7 @@
 
 <body>
 
-        <nav>
+    <nav>
         <div class="container">
             <a href="#" class="logo">
                 <div class="icon"><i class="fa-solid fa-file-circle-check"></i></div>
@@ -29,11 +29,12 @@
             </a>
             <div class="links">
                 <ul>
-                    <li><a href="../index.html">الصفحة الرئيسية</a></li>
+                    <li><a href="../index.html#home">الصفحة الرئيسية</a></li>
                     <li><a href="../index.html#bests">المميزات</a></li>
                     <li><a href="../index.html#howWork">كيف يعمل</a></li>
-                    <li><a href="pages/about.html">من نحن</a></li>
-                    <li><a href="pages/contact.html">تواصل معي</a></li>
+                    <li><a href="../pages/about.html">من نحن</a></li>
+                    <li><a href="../pages/tools.html">الأدوات</a></li>
+                    <li><a href="../pages/contact.html">تواصل معي</a></li>
                 </ul>
             </div>
             <div class="end">
@@ -98,10 +99,10 @@
                     <div class="card-input">
                         <label for="image">اختيار صورة :</label>
                         <!-- <label for="image" class="inputImg"> -->
-                            <!-- اضغط لاختيار صورة -->
-                            <input type="file" id="image">
+                        <!-- اضغط لاختيار صورة -->
+                        <input type="file" id="image">
                         <!-- </label> -->
-                          <!-- style="opacity: 0; position: absolute; top: 0; left: 0;" -->
+                        <!-- style="opacity: 0; position: absolute; top: 0; left: 0;" -->
                         <!-- <input style="display: none;" type="file" id="image"> -->
                     </div>
                 </div>
@@ -115,7 +116,7 @@
                     <h3>الملخص المهني</h3>
                     <h3 class="addSection">إضافة</h3>
                 </div>
-                <div class="card-body about cardSlide">
+                <div class="card-body about cardSlide" data-section="about">
                     <div class="card-input">
                         <label for="about">ملخص مهني:</label>
                         <textarea type="text" id="about" placeholder="ادخل ملخص مهني.."></textarea>
@@ -131,46 +132,46 @@
                     <h3>التعليم</h3>
                     <h3 class="addSection">إضافة</h3>
                 </div>
-<div class="cardSlide">
-<div class="card-body ">
-                    <div class="card-input">
-                        <label for="degree">المؤهل الدراسي :</label>
-                        <input type="text" id="degree" placeholder="مثال: بكالوريوس علوم الحاسب">
+                <div class="cardSlide" data-section="education">
+                    <div class="card-body ">
+                        <div class="card-input">
+                            <label for="degree">المؤهل الدراسي :</label>
+                            <input type="text" id="degree" placeholder="مثال: بكالوريوس علوم الحاسب">
+                        </div>
+
+                        <div class="card-input">
+                            <label for="university">الجامعة / المؤسسة التعليمية :</label>
+                            <input type="text" id="university" placeholder="ادخل اسم الجامعة أو المؤسسة">
+                        </div>
                     </div>
 
-                    <div class="card-input">
-                        <label for="university">الجامعة / المؤسسة التعليمية :</label>
-                        <input type="text" id="university" placeholder="ادخل اسم الجامعة أو المؤسسة">
-                    </div>
-                </div>
-
-                <!-- <div class="card-body about">
+                    <!-- <div class="card-body about">
                     <div class="card-input">
                         <label for="major">التخصص :</label>
                         <input type="text" id="major" placeholder="مثال: علوم الحاسب">
                     </div>
                 </div> -->
 
-                <div class="card-body">
-                    <div class="card-input">
-                        <label for="startYear">تاريخ البدء :</label>
-                        <input type="text" id="startYear" placeholder="مثال: 2020">
+                    <div class="card-body">
+                        <div class="card-input">
+                            <label for="startYear">تاريخ البدء :</label>
+                            <input type="text" id="startYear" placeholder="مثال: 2020">
+                        </div>
+
+                        <div class="card-input">
+                            <label for="endYear">تاريخ الانتهاء :</label>
+                            <input type="text" id="endYear" placeholder="مثال: 2024 أو حتى الآن">
+                        </div>
                     </div>
 
-                    <div class="card-input">
-                        <label for="endYear">تاريخ الانتهاء :</label>
-                        <input type="text" id="endYear" placeholder="مثال: 2024 أو حتى الآن">
+                    <button type="button" class="add-btn" id="addDegree">
+                        إضافة مؤهل
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="preveview prevEdu">
                     </div>
                 </div>
 
-                <button type="button" class="add-btn" id="addDegree">
-                    إضافة مؤهل
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="preveview prevEdu">
-                </div>
-</div>
-                
             </div>
             <div class="card">
                 <div class="card-head">
@@ -182,43 +183,43 @@
 
                 </div>
 
-                <div class="cardSlide">
+                <div class="cardSlide" data-section="experience">
                     <div class="card-body">
-                    <div class="card-input">
-                        <label for="jobTitleEx">المهنة :</label>
-                        <input type="text" id="jobTitleEx" placeholder="مثال: مهندس برمجيات">
+                        <div class="card-input">
+                            <label for="jobTitleEx">المهنة :</label>
+                            <input type="text" id="jobTitleEx" placeholder="مثال: مهندس برمجيات">
+                        </div>
+
+                        <div class="card-input">
+                            <label for="companyName">الشركة / اسم مكان العمل :</label>
+                            <input type="text" id="companyName" placeholder="ادخل الشركة أو اسم مكان العمل">
+                        </div>
                     </div>
 
-                    <div class="card-input">
-                        <label for="companyName">الشركة / اسم مكان العمل :</label>
-                        <input type="text" id="companyName" placeholder="ادخل الشركة أو اسم مكان العمل">
-                    </div>
-                </div>
+                    <div class="card-body">
+                        <div class="card-input">
+                            <label for="startYearEx">تاريخ البدء :</label>
+                            <input type="text" id="startYearEx" placeholder="مثال: 2020">
+                        </div>
 
-                <div class="card-body">
-                    <div class="card-input">
-                        <label for="startYearEx">تاريخ البدء :</label>
-                        <input type="text" id="startYearEx" placeholder="مثال: 2020">
+                        <div class="card-input">
+                            <label for="endYearEx">تاريخ الانتهاء :</label>
+                            <input type="text" id="endYearEx" placeholder="مثال: 2024 أو حتى الآن">
+                        </div>
                     </div>
 
-                    <div class="card-input">
-                        <label for="endYearEx">تاريخ الانتهاء :</label>
-                        <input type="text" id="endYearEx" placeholder="مثال: 2024 أو حتى الآن">
+                    <div class="card-body about">
+                        <div class="card-input">
+                            <label for="descriptionJob">الوصف :</label>
+                            <textarea id="descriptionJob" placeholder="ادخل وصف.."></textarea>
+                        </div>
                     </div>
-                </div>
-
-                <div class="card-body about">
-                    <div class="card-input">
-                        <label for="descriptionJob">الوصف :</label>
-                        <textarea id="descriptionJob" placeholder="ادخل وصف.."></textarea>
+                    <button type="button" class="add-btn" id="addEx">
+                        إضافة خبرة
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="preveview prevEx">
                     </div>
-                </div>
-                <button type="button" class="add-btn" id="addEx">
-                    إضافة خبرة
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="preveview prevEx">
-                </div>
                 </div>
             </div>
 
@@ -231,19 +232,19 @@
                     <h3 class="addSection">إضافة</h3>
                 </div>
 
-                <div class="cardSlide">
+                <div class="cardSlide"  data-section="skills">
                     <div class="card-body about">
-                    <div class="card-input">
-                        <label for="skills">المهارة :</label>
-                        <input type="text" id="skills" placeholder="ادخل مهارة..">
-                        <button type="button" class="add-btn skillBtn" id="skillBtn">
-                            إضافة مهارة
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
+                        <div class="card-input">
+                            <label for="skills">المهارة :</label>
+                            <input type="text" id="skills" placeholder="ادخل مهارة..">
+                            <button type="button" class="add-btn skillBtn" id="skillBtn">
+                                إضافة مهارة
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <ul class="preveview prevSkills">
-                </ul>
+                    <ul class="preveview prevSkills">
+                    </ul>
                 </div>
             </div>
 
@@ -256,24 +257,24 @@
                     <h3 class="addSection">إضافة</h3>
                 </div>
 
-                <div class="cardSlide">
+                <div class="cardSlide" data-section="languages">
                     <div class="card-body">
-                    <div class="card-input">
-                        <label for="language">اللفة :</label>
-                        <input type="text" id="language" placeholder="مثال: اللغة العربية">
-                    </div>
+                        <div class="card-input">
+                            <label for="language">اللفة :</label>
+                            <input type="text" id="language" placeholder="مثال: اللغة العربية">
+                        </div>
 
-                    <div class="card-input">
-                        <label for="languageLevel">المستوى :</label>
-                        <input type="number" id="languageLevel" placeholder="مثال: 70">
+                        <div class="card-input">
+                            <label for="languageLevel">المستوى :</label>
+                            <input type="number" id="languageLevel" placeholder="مثال: 70">
+                        </div>
                     </div>
-                </div>
-                <button type="button" class="add-btn" id="addlang">
-                    إضافة لغة
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="preveview prevLang">
-                </div>
+                    <button type="button" class="add-btn" id="addlang">
+                        إضافة لغة
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="preveview prevLang">
+                    </div>
                 </div>
             </div>
 
@@ -286,40 +287,40 @@
                     <h3 class="addSection">إضافة</h3>
                 </div>
 
-                <div class="cardSlide">
+                <div class="cardSlide" data-section="projects">
                     <div class="card-body about">
-                    <div class="card-input">
-                        <label for="proName"> اسم المشروع :</label>
-                        <input type="text" id="proName" placeholder="مثال: متجر إلكتروني">
-                    </div>
-                </div>
-
-                <div class="card-body about">
-                    <div class="card-input">
-                        <label for="descriptionPro">الوصف :</label>
-                        <textarea type="text" id="descriptionPro" placeholder="ادخل وصف.."></textarea>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <div class="card-input">
-                        <label for="liveUrl">معاينة المشروع :</label>
-                        <input type="url" id="liveUrl" placeholder="ادخل رابط معاينة المشروع..">
+                        <div class="card-input">
+                            <label for="proName"> اسم المشروع :</label>
+                            <input type="text" id="proName" placeholder="مثال: متجر إلكتروني">
+                        </div>
                     </div>
 
-                    <div class="card-input">
-                        <label for="githubUrl">رابط المشروع :</label>
-                        <input type="url" id="githubUrl" placeholder="ادخل رابط المشروع..">
+                    <div class="card-body about">
+                        <div class="card-input">
+                            <label for="descriptionPro">الوصف :</label>
+                            <textarea type="text" id="descriptionPro" placeholder="ادخل وصف.."></textarea>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="card-body">
+                        <div class="card-input">
+                            <label for="liveUrl">معاينة المشروع :</label>
+                            <input type="url" id="liveUrl" placeholder="ادخل رابط معاينة المشروع..">
+                        </div>
+
+                        <div class="card-input">
+                            <label for="githubUrl">رابط المشروع :</label>
+                            <input type="url" id="githubUrl" placeholder="ادخل رابط المشروع..">
+                        </div>
+                    </div>
 
 
-                <button type="button" class="add-btn" id="addPro">
-                    إضافة مشروع
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="preveview prevPro">
-                </div>
+                    <button type="button" class="add-btn" id="addPro">
+                        إضافة مشروع
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="preveview prevPro">
+                    </div>
                 </div>
             </div>
 
@@ -332,7 +333,7 @@
                     <h3 class="addSection">إضافة</h3>
                 </div>
 
-                <div class="card-body cardSlide">
+                <div class="card-body cardSlide" data-section="links">
                     <div class="card-input">
                         <label for="linkedin">رابط لينكدان :</label>
                         <input type="url" id="linkedin" placeholder="ادخل الرابط هنا">
@@ -354,17 +355,31 @@
 
 
             <button type="button" class="add-btn" id="createCv">
-                انشاء سيرة ذاتية
+                <p>انشاء سيرة ذاتية</p>
                 <i class="fa-solid fa-magic"></i>
+            </button>
+            <button class="add-btn" type="button" id="delCv">
+                حذف البيانات
+                <i class="fa-solid fa-trash-alt"></i>
             </button>
         </div>
     </section>
+
+    <div class="checkDataStorage">
+        <div class="container ">
+            <p>لقد اكتشفنا بيانات محفوظة على هذا الجهاز</p>
+            <div class="btn">
+                <button id="continueData">استكمال البانات</button>
+                <button id="newCv">انشاء cv جديد</button>
+            </div>
+        </div>
+    </div>
 
 
 
     <section class="templates">
         <div class="container">
-            
+
             <label for="tem1" class="box active" data-temp="temp-1">
                 <div class="checkBox">
                     <h3>القالب الاول</h3>
@@ -388,7 +403,7 @@
                 </div>
                 <img src="../images/temp-3.png" alt="">
             </label>
-<!-- 
+            <!-- 
             <label class="box" data-temp="temp-4">
                 <div class="checkBox">
                     <h3 for="tem4">تصميم بنطام ( ats )</h3>
@@ -402,6 +417,7 @@
 
     <div class="btn-pribt container">
         <button class="btnPrint">طباعة السيرة الذاتية</button>
+        <button class="btnEdit">تعديل السيرة الذاتية</button>
     </div>
 
     <div class="imageShow">
@@ -483,42 +499,43 @@
 
 
     <footer class="footer">
-  <div class="container">
+        <div class="container">
 
-    <div class="footer-content">
+            <div class="footer-content">
 
-      <div class="footer-brand">
-        <h2>سيرتي.</h2>
-        <p>
-          أنشئ سيرتك الذاتية بسهولة واختر التصميم المناسب لك.
-        </p>
-      </div>
+                <div class="footer-brand">
+                    <h2>سيرتي.</h2>
+                    <p>
+                        أنشئ سيرتك الذاتية بسهولة واختر التصميم المناسب لك.
+                    </p>
+                </div>
 
-      <div class="footer-links">
-        <h3>روابط</h3>
+                <div class="footer-links">
+                    <h3>روابط</h3>
 
-        <a href="#">الرئيسية</a>
-        <a href="#">القوالب</a>
-        <a href="#">أدوات أخرى</a>
-      </div>
+                    <a href="../index.html">الرئيسية</a>
+                    <a href="../pages/about.html">عن الموقع</a>
+                    <a href="../pages/tools.html">الأدوات</a>
+                    <a href="../pages/contact.html">تواصل معي</a>
+                </div>
 
-      <div class="footer-social">
-        <h3>تواصل معي</h3>
+                <div class="footer-social">
+                    <h3>تواصل معي</h3>
 
-        <a href="#">GitHub</a>
-        <a href="#">LinkedIn</a>
-      </div>
+                    <a href="https://github.com/omair-660">GitHub</a>
+                    <a href="https://www.linkedin.com/in/omair-mohammed-%F0%9F%87%B5%F0%9F%87%B8-4120b2283?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a>
+                </div>
 
-    </div>
+            </div>
 
-    <div class="footer-bottom">
-      <p>
-        © 2026 CV Builder — جميع الحقوق محفوظة
-      </p>
-    </div>
+            <div class="footer-bottom">
+                <p>
+                    © 2026 CV Builder — جميع الحقوق محفوظة
+                </p>
+            </div>
 
-  </div>
-</footer>
+        </div>
+    </footer>
 
     <script src="../js/common.js"></script>
     <script src="../js/main.js"></script>

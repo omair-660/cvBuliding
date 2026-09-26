@@ -29,6 +29,7 @@ let linkedin = document.querySelector("#linkedin");
 let github = document.querySelector("#github");
 let portfolio = document.querySelector("#portfolio");
 let createCv = document.querySelector("#createCv");
+let delCv = document.querySelector("#delCv");
 let prevEdu = document.querySelector(".prevEdu");
 let prevEx = document.querySelector(".prevEx");
 let prevSkills = document.querySelector(".prevSkills");
@@ -70,9 +71,11 @@ closeErrBtn.addEventListener("click", () => {
   closeErr();
 });
 let btnPrint = document.querySelector(".btnPrint");
+let btnEdit = document.querySelector(".btnEdit");
 
 cvPrevCon.style.display = "none";
-    btnPrint.style.display = "none";
+btnPrint.style.display = "none";
+btnEdit.style.display = "none";
 
 // let preveviewImage = document.querySelector('.preveviewImage')
 // let preveviewName = document.querySelector('.preveviewName')
@@ -115,15 +118,16 @@ let cvData = {
 // create url src for image and added to object
 image.addEventListener("change", (e) => {
   imageVal = URL.createObjectURL(e.target.files[0]);
-  if (e.target.files[0].type.includes('image')) {
+  if (e.target.files[0].type.includes("image")) {
     cvData.personal.image = imageVal;
     // inputImg.textContent = e.target.files[0].name;
-    e.target.files[0] = ''
-  }else{
-    sheowErr()
-    errosText.textContent = `يرجى إختيار صورة فقط وانت اختارت (${e.target.files[0].type}) وهذا غير صالح`
+    e.target.files[0] = "";
+    previewDataImage.innerHTML = `<img src="${cvData.personal.image}" alt=${cvData.personal.name}>`
+ previewDataImage.style.display = "block"
+  } else {
+    sheowErr();
+    errosText.textContent = `يرجى إختيار صورة فقط وانت اختارت (${e.target.files[0].type}) وهذا غير صالح`;
   }
-
 });
 
 function sheowErr() {
@@ -143,54 +147,56 @@ createCv.addEventListener("click", () => {
   } else if (!jobTitle.value.trim()) {
     jobTitle.classList.add("err");
     jobTitle.focus();
-    errosText.innerHTML = "المسمى الوطيفي مطلوب";
+    errosText.innerHTML = "المسمى الوظيفي مطلوب";
     sheowErr();
     return;
-  } else if (!mail.value.trim()) {
+  } else if (!mail.value.trim()) { 
     mail.classList.add("err");
     mail.focus();
-    errosText.innerHTML = "البريد الالكتروني مطلوب";
+    errosText.innerHTML = "البريد الإلكتروني مطلوب";
     sheowErr();
-    cvPrevCon.style.display = "none";
-    btnPrint.style.display = "none";
-
+    return;
+  } else if (!mailRejex()) { 
+    mail.focus();
+    errosText.innerHTML = "صيغة البريد الإلكتروني غير صحيحة";
+    mail.classList.add("err");
+    sheowErr();
     return;
   } else {
+    delCv.style.display = 'block'
     displayData();
-    checkLangSec()
+    checkLangSec();
+    cvData.personal.image = ''
+    localStorage.setItem("cvData", JSON.stringify(cvData));
+
+    clearInputs()
     btnPrint.style.display = "block";
+    btnEdit.style.display = "block";
     cvPrevCon.style.display = "block";
-    //   cvData = {
-    //   personal: {
-    //     name: "",
-    //     jobTitle: "",
-    //     email: "",
-    //     phone: "",
-    //     location: "",
-    //     image: "",
-    //   },
-
-    //   about: "",
-
-    //   education: [],
-
-    //   experience: [],
-
-    //   skills: [],
-
-    //   languages: [],
-
-    //   projects: [],
-
-    //   links: {
-    //     linkedin: "",
-    //     github: "",
-    //     portfolio: "",
-    //   },
-    // }
+    if (document.querySelector('#createCv p').textContent == 'تعديل السيرة الذاتية') {
+      document.querySelector('#createCv p').textContent = 'انشاء سيرتك الذاتية'
+      createCv.style.background = 'var(--success)'
+      clearInputs()
+    }
+    goToPreview()
   }
 });
 
+function mailRejex() {
+  let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(mail.value.trim());
+}
+
+mail.addEventListener('input', () => {
+  if (mailRejex()) {
+    mail.classList.remove('err');
+    errosText.textContent = ""; 
+  } else {
+    mail.classList.add('err');
+    errosText.textContent = "صيغة البريد الإلكتروني غير صحيحة";
+    sheowErr();
+  }
+});
 // add education data to object
 addDegree.addEventListener("click", () => {
   let degreeVal = degree.value.trim();
@@ -198,7 +204,7 @@ addDegree.addEventListener("click", () => {
   // let majorVal = major.value.trim().toLowerCase();
   let startYearVal = startYear.value.trim();
   let endYearVal = endYear.value.trim();
-  if (degreeVal && universityVal && startYearVal && endYearVal) {
+  if (degreeVal && universityVal) {
     cvData.education.push({
       degree: degreeVal,
       university: universityVal,
@@ -252,8 +258,7 @@ addEx.addEventListener("click", () => {
   let descriptionJobVal = descriptionJob.value.trim();
 
   if (
-    (jobTitleExVal && companyNameVal && startYearExVal && endYearExVal) ||
-    descriptionJobVal
+    (jobTitleExVal && companyNameVal ) 
   ) {
     cvData.experience.push({
       jobTitle: jobTitleExVal,
@@ -265,11 +270,11 @@ addEx.addEventListener("click", () => {
     displayExperience();
     checkExperienceItem();
     closeErr();
-    jobTitleEx.value = ''
-companyName.value = ''
-startYearEx.value = ''
-endYearEx.value = ''
-descriptionJob.value = ''
+    jobTitleEx.value = "";
+    companyName.value = "";
+    startYearEx.value = "";
+    endYearEx.value = "";
+    descriptionJob.value = "";
   } else {
     sheowErr();
     errosText.textContent = "لا يمكن إضافة خبرة والحقول فارغة !!";
@@ -305,10 +310,11 @@ skillBtn.addEventListener("click", () => {
 
   if (skillVal) {
     cvData.skills.push(skillVal);
+    skills.focus()
     displaySkills();
     checkSkillsItem();
     closeErr();
-    skills.value = ''
+    skills.value = "";
   } else {
     errosText.textContent = "لا يمكن إضافة مهارة والحقل فارغ !!";
     sheowErr();
@@ -336,7 +342,7 @@ function delskill(i) {
 addlang.addEventListener("click", () => {
   let langVal = language.value.trim();
   let langLevelVal = Number(languageLevel.value);
-  if (langLevelVal > 100 || langLevelVal < 0 || langLevelVal == '') {
+  if (langLevelVal > 100 || langLevelVal < 0 || langLevelVal == "") {
     sheowErr();
     errosText.textContent = "يرجى ادخال رقم ما بين [ 1 - 100 ] !!";
     languageLevel.focus();
@@ -344,9 +350,9 @@ addlang.addEventListener("click", () => {
     return;
   }
   if (!langVal || !langLevelVal) {
-    sheowErr()
-    errosText.textContent = 'لا يمكن إضافة لغة والحقول فارغة'
-    return
+    sheowErr();
+    errosText.textContent = "لا يمكن إضافة لغة والحقول فارغة";
+    return;
   }
 
   cvData.languages.push({
@@ -356,8 +362,8 @@ addlang.addEventListener("click", () => {
   displayLanguage();
   checkLanguagesItem();
   closeErr();
-  language.value = ''
-languageLevel.value = ''
+  language.value = "";
+  languageLevel.value = "";
   languageLevel.classList.remove("err");
 });
 
@@ -403,10 +409,10 @@ addPro.addEventListener("click", () => {
   checkProjectsItem();
   displayProjects();
   closeErr();
-   proName.value = ''
- descriptionPro.value = ''
- liveUrl.value = ''
-githubUrl.value = ''
+  proName.value = "";
+  descriptionPro.value = "";
+  liveUrl.value = "";
+  githubUrl.value = "";
 });
 
 // display projects data to html body
@@ -464,13 +470,13 @@ selectedLang.addEventListener("change", () => {
       ? (cvPrevCon.style.direction = "ltr")
       : (cvPrevCon.style.direction = "rtl");
 
-  checkLangSec()
+  checkLangSec();
 });
 
 function displayAboutData() {
   if (cvData.about) {
     aboutPreview.innerHTML = `
-      ${selectedLang.value === "arabic" ? `<h3>الخبرات العملية</h3>` : `<h3>About Me</h3>`}
+      ${selectedLang.value === "arabic" ? `<h3>نبذة عني</h3>` : `<h3>About Me</h3>`}
           <p>
 ${cvData.about}
           </p>
@@ -511,7 +517,7 @@ function displayExData() {
     ? (preveviewExperinse.style.display = "none")
     : (preveviewExperinse.style.display = "block");
   preveviewExperinse.innerHTML = `
-          ${selectedLang.value === "arabic" ? `<h3>الخبرات العملية</h3>` : `<h3>Experiences</h3>`}
+          ${selectedLang.value === "arabic" ? `<h3>الخبرات المهنية</h3>` : `<h3>Experiences</h3>`}
 
 ${boxExper}`;
 }
@@ -530,8 +536,8 @@ function displayProData() {
             </p>
 
             <div class="project-links">
-              <a href="${ele.liveUrl}">المعاينة</a>
-              <a href="${ele.githubUrl}">GitHub</a>
+              ${ele.liveUrl ? `<a href="${ele.liveUrl}">${selectedLang.value == 'arabic' ? 'المعاينة' : 'Preview'}</a>` : ''}
+              ${ele.githubUrl ? `<a href="${ele.githubUrl}">GitHub</a>` : ''}
             </div>
 
           </article>
@@ -597,7 +603,7 @@ function displayLangData() {
     ? (preveviewLanguage.style.display = "none")
     : (preveviewLanguage.style.display = "block");
   preveviewLanguage.innerHTML = `
-          ${selectedLang.value === "arabic" ? `<h3>اللغات</h3>` : `<h3>Languaes</h3>`}
+          ${selectedLang.value === "arabic" ? `<h3>اللغات</h3>` : `<h3>Languages</h3>`}
 ${boxLang}`;
 }
 
@@ -804,7 +810,7 @@ let closeImgShow = document.querySelector("#closeImgShow");
 
 templates.forEach((temp) => {
   temp.addEventListener("click", () => {
-    cvPrevCon.classList.remove("temp-1", "tem-2", "temp-3" , "temp-4");
+    cvPrevCon.classList.remove("temp-1", "tem-2", "temp-3", "temp-4");
     cvPrevCon.classList.add(temp.dataset.temp);
 
     templates.forEach((item) => {
@@ -827,38 +833,189 @@ closeImgShow.addEventListener("click", () => {
 });
 
 function checkLangSec() {
-    let itemCheckLang = document.querySelectorAll(".checkLang");
+  let itemCheckLang = document.querySelectorAll(".checkLang");
   itemCheckLang.forEach((item) => {
     if (selectedLang.value === "arabic") {
-      console.log(true);
       item.classList.add("ar");
       item.classList.remove("en");
     } else {
-      console.log(false);
-      
       item.classList.remove("ar");
       item.classList.add("en");
     }
   });
 }
 
-let addSection = document.querySelectorAll('.addSection')
+let addSection = document.querySelectorAll(".addSection");
 
 addSection.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    let card = btn.closest(".card");
+    let cardSlide = card.querySelector(".cardSlide");
 
-  btn.addEventListener('click', () => {
+    cardSlide.classList.toggle("slide");
 
-    let card = btn.closest('.card')
-    let cardSlide = card.querySelector('.cardSlide')
-
-    cardSlide.classList.toggle('slide')
-
-    if (cardSlide.classList.contains('slide')) {
-      btn.textContent = 'إخفاء'
+    if (cardSlide.classList.contains("slide")) {
+      btn.textContent = "إخفاء";
     } else {
-      btn.textContent = 'إضافة'
+      btn.textContent = "إضافة";
     }
+  });
+});
 
-  })
+let continueData = document.getElementById("continueData");
+let newCv = document.getElementById("newCv");
+let checkDataStorage = document.querySelector(".checkDataStorage");
 
+function restoreData() {
+  if (localStorage.getItem("cvData")) {
+    cvData = JSON.parse(localStorage.getItem("cvData"));
+    checkDataStorage.classList.add("show");
+  } else {
+    console.log("no data restored");
+    checkDataStorage.classList.remove("show");
+  }
+}
+restoreData();
+
+continueData.addEventListener("click", () => {
+    btnEdit.style.display = "block";
+  checkDataStorage.classList.remove("show");
+  document.querySelector('#createCv p').textContent = 'تعديل السيرة الذاتية'
+  createCv.style.background = '#ff9800'
+  cvPrevCon.style.display = 'block'
+  btnPrint.style.display = 'block'
+    delCv.style.display = 'block'
+  updateData();
+  displayData()
+  window.scrollTo({top : 0})
+});
+
+newCv.addEventListener("click", () => {
+  checkDataStorage.classList.remove("show");
+  userName.focus()
+  deleteDataCv()
 })
+
+let cardSlides = document.querySelectorAll(".cardSlide");
+
+function updateData() {
+  userName.value = cvData.personal.name;
+  jobTitle.value = cvData.personal.jobTitle;
+  mail.value = cvData.personal.email;
+  locationTitle.value = cvData.personal.location;
+  tel.value = cvData.personal.phone;
+  about.value = cvData.about;
+  linkedin.value = cvData.links.linkedin
+  github.value = cvData.links.github
+  portfolio.value = cvData.links.portfolio
+  displayEducation();
+  checkEducationItem();
+  displayExperience();
+  checkExperienceItem();
+  displayLanguage();
+  checkLanguagesItem();
+  displayProjects();
+  checkProjectsItem();
+  displaySkills();
+  checkSkillsItem();
+  cardSlides.forEach((item) => {
+    let card = item.closest(".card");
+    let btn = card.querySelector(".addSection");
+    if (cvData.about.length > 0 && item.dataset.section === "about") {
+      item.classList.add("slide");
+      btn.textContent = "إخفاء";
+    }
+    if (cvData.education.length > 0 && item.dataset.section === "education") {
+      item.classList.add("slide");
+      btn.textContent = "إخفاء";
+    }
+    if (cvData.experience.length > 0 && item.dataset.section === "experience") {
+      item.classList.add("slide");
+      btn.textContent = "إخفاء";
+    }
+    if (cvData.languages.length > 0 && item.dataset.section === "languages") {
+      item.classList.add("slide");
+      btn.textContent = "إخفاء";
+    }
+    if (cvData.projects.length > 0 && item.dataset.section === "projects") {
+      item.classList.add("slide");
+      btn.textContent = "إخفاء";
+    }
+    if (cvData.skills.length > 0 && item.dataset.section === "skills") {
+      item.classList.add("slide");
+      btn.textContent = "إخفاء";
+    }
+    if (cvData.links && item.dataset.section === "links") {
+      item.classList.add("slide");
+      btn.textContent = "إخفاء";
+    }
+  });
+}
+
+
+function goToPreview() {
+  let cvHeghit = cvPrevCon.offsetTop
+  window.scrollTo({top : cvHeghit})
+}
+
+delCv.addEventListener('click' , ()=>{
+  deleteDataCv()
+  clearInputs()
+  delCv.style.display = 'none'
+})
+
+function deleteDataCv() {
+  clearInputs()
+  localStorage.removeItem('cvData')
+    cvData = {
+  personal: {
+    name: "",
+    jobTitle: "",
+    email: "",
+    phone: "",
+    location: "",
+    image: "",
+  },
+
+  about: "",
+
+  education: [],
+
+  experience: [],
+
+  skills: [],
+
+  languages: [],
+
+  projects: [],
+
+  links: {
+    linkedin: "",
+    github: "",
+    portfolio: "",
+  },
+};
+}
+btnEdit.addEventListener('click' , ()=>{
+    document.querySelector('#createCv p').textContent = 'تعديل السيرة الذاتية'
+  createCv.style.background = '#ff9800'
+  updateData()
+  window.scrollTo({top : 0})
+})
+
+function clearInputs() {
+  userName.value = ''
+  jobTitle.value = ''
+  mail.value = ''
+  locationTitle.value = ''
+  tel.value = ''
+  about.value = ''
+  linkedin.value = ''
+  github.value = ''
+  portfolio.value = ''
+  prevEdu.style.display = 'none'
+  prevEx.style.display = 'none'
+  prevLang.style.display = 'none'
+  prevPro.style.display = 'none'
+  prevSkills.style.display = 'none'
+}

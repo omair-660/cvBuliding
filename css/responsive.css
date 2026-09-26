@@ -26,6 +26,8 @@
 @media (max-width:820px) {
   .cv-preview{
   overflow-x: scroll;
+  /* width: 80%; */
+  margin: auto;
 }
 nav .container .end .bars{
   display: block;
