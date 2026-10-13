@@ -2173,3 +2173,56 @@ input#image {
   filter: grayscale(0.5);
   transform: translateY(-2px) scale(1.01);
 }
+
+.liveprev{
+  position: fixed;
+  left:-20px;
+  top: 180px;
+  color: var(--text);
+  background: var(--shadow);
+  width: 100%;
+  transform: rotate(-90deg);
+  text-align: center;
+  z-index: 3;
+}
+.goTop{
+  position: fixed;
+  bottom: 100%;
+  right: 25px;
+  width: 43px;
+  height: 43px;
+  z-index: 99;
+  background: rgb(140, 8, 8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--shadow);
+  transition: 0.5s;
+  cursor: pointer;
+  opacity: 0;
+  scale: 2;
+}
+.goTop.show{
+  bottom: 25px;
+  opacity: 1;
+  scale: 1;
+  background: var(--primary);
+}
+.goTop:hover{
+  background: var(--primary-hover);
+  box-shadow: 0 8px 30px var(--shadow);
+  transform: translateY(-5px) scale(1.02);
+}
+.goTop:active{
+  transform: translateY(-5px) scale(0.8);
+}
+.goTop i{
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+  transition: 0.8s;
+}
+.goTop:hover i{
+  color: #eee;
+  text-shadow: -1px -1px 2px #000;
+}

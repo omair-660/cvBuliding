@@ -173,7 +173,7 @@ createCv.addEventListener("click", () => {
     btnPrint.style.display = "block";
     btnEdit.style.display = "block";
     cvPrevCon.style.display = "block";
-    if (document.querySelector('#createCv p').textContent == 'تعديل السيرة الذاتية') {
+    if (document.querySelector('#createCv p').textContent == 'استكمال السيرة الذاتية' || document.querySelector('#createCv p').textContent == 'تعديل السيرة الذاتية') {
       document.querySelector('#createCv p').textContent = 'انشاء سيرتك الذاتية'
       createCv.style.background = 'var(--success)'
       clearInputs()
@@ -880,7 +880,7 @@ restoreData();
 continueData.addEventListener("click", () => {
     btnEdit.style.display = "block";
   checkDataStorage.classList.remove("show");
-  document.querySelector('#createCv p').textContent = 'تعديل السيرة الذاتية'
+  document.querySelector('#createCv p').textContent = 'استكمال السيرة الذاتية'
   createCv.style.background = '#ff9800'
   cvPrevCon.style.display = 'block'
   btnPrint.style.display = 'block'

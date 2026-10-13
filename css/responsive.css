@@ -14,7 +14,7 @@
   display: inline;
 }
   .hero .container .image{
-    width: 400px;
+    /* width: 400px; */
   }
   .common .con{
     grid-template-columns: repeat(2 , 1fr);
